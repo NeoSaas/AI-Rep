@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REAMAZE_API_KEY = 'api_key'
 
 # Application definition
 

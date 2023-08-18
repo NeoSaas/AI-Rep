@@ -2,8 +2,11 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+    const nav = useNavigate();
     const initialValues = {
         username: '',
         password: ''
@@ -14,9 +17,14 @@ function LoginForm() {
         password: Yup.string().required('Password is required')
     });
 
-    const handleSubmit = (values) => {
-        console.log(values);
-        // Handle the form submission logic here
+    const handleSubmit = async (values) => {
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/login/', values);
+            console.log(response.data); 
+            nav('/admin')
+        } catch (error) {
+            console.error(error.response.data); 
+        }
     };
 
     return (

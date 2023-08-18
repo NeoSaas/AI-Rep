@@ -31,6 +31,7 @@ function AdminPanel() {
     return (
       <div className="bg-gray-200 min-h-screen">
         <h1 className="text-center text-3xl py-4">Administrator Panel</h1>
+        <DarkModeToggle/>
         <SearchBar onSearch={setSearchQuery} />
         <FilterOptions onFilter={setFilter} />
         {/* Simple tag creation mockup */}
