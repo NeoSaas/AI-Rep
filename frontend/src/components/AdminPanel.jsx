@@ -4,6 +4,7 @@ import DarkModeToggle from './DarkModeToggle';
 import SearchBar from './SearchBar';
 import FilterOptions from './FilterOptions';
 import ConversationList from './ConversationList';
+import LogoutButton from './authentication/LogoutButton';
 
 function AdminPanel() {
     // State for search query
@@ -29,16 +30,17 @@ function AdminPanel() {
     };
   
     return (
-      <div className="bg-gray-200 min-h-screen">
+      <div className="bg-gray-200 dark:bg-slate-900 dark:text-white min-h-screen">
         <h1 className="text-center text-3xl py-4">Administrator Panel</h1>
         <DarkModeToggle/>
+        <LogoutButton/>
         <SearchBar onSearch={setSearchQuery} />
         <FilterOptions onFilter={setFilter} />
         {/* Simple tag creation mockup */}
-        <div className="p-4">
+        <div className="p-4 mx-10">
           <input type="text" placeholder="Conversation ID" className="border p-2 rounded mr-2" />
           <input type="text" placeholder="New Tag" className="border p-2 rounded mr-2" />
-          <button className="bg-green-500 text-white p-2 rounded" onClick={() => handleTagCreation()}>Add Tag</button>
+          <button className="bg-green-500 dark:text-white p-2 rounded" onClick={() => handleTagCreation()}>Add Tag</button>
         </div>
         <ConversationList searchQuery={searchQuery} filter={filter} />
       </div>
