@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import requests
 
@@ -42,7 +43,7 @@ def login_view(request):
         return JsonResponse({'message': 'Login failed'}, status=401)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def logout_view(request):
     #logout
     logout(request)

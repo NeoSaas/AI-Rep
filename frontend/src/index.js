@@ -4,13 +4,14 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
+import { AuthProvider } from './components/authentication/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CookiesProvider>
+    {/* <AuthProvider> */}
       <App />
-    </CookiesProvider>
+    {/* </AuthProvider> */}
   </React.StrictMode>
 );
 

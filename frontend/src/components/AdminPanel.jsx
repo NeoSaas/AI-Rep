@@ -6,7 +6,7 @@ import FilterOptions from './FilterOptions';
 import ConversationList from './ConversationList';
 import LogoutButton from './authentication/LogoutButton';
 
-function AdminPanel() {
+function AdminPanel({setIsAuthenticated, isAuthenticated}) {
     // State for search query
     const [searchQuery, setSearchQuery] = useState('');
     
@@ -30,10 +30,10 @@ function AdminPanel() {
     };
   
     return (
-      <div className="bg-gray-200 dark:bg-slate-900 dark:text-white min-h-screen">
+      <div className="bg-gray-200 dark:bg-slate-900 dark:text-white min-h-screen dark:transition-colors dark:duration-300 transition-colors duration-300 ease-in-out dark:ease-in-out">
         <h1 className="text-center text-3xl py-4">Administrator Panel</h1>
         <DarkModeToggle/>
-        <LogoutButton/>
+        <LogoutButton setIsAuthenticated={setIsAuthenticated}/>
         <SearchBar onSearch={setSearchQuery} />
         <FilterOptions onFilter={setFilter} />
         {/* Simple tag creation mockup */}

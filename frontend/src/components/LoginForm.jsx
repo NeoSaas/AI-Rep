@@ -1,5 +1,5 @@
 // LoginForm.js
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -20,11 +20,16 @@ function LoginForm({ setIsAuthenticated }) {
     const handleSubmit = async (values) => {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/login/', values);
-            console.log(response.data); 
-            setIsAuthenticated(true);
-            nav('/admin');
+            if (response.hasOwnProperty('data')) {
+                console.log(response.data);
+                setIsAuthenticated(true);
+                nav('/admin');
+                
+            } else {
+                console.error('Unexpected response:', response);
+            }
         } catch (error) {
-            console.error(error.response.data); 
+            console.error(error); 
         }
     };
 

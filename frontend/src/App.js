@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Login from './components/LoginScreen';
 import AdminPanel from './components/AdminPanel';
-import PrivateRoute from './privateroutes/PrivateRoute';
+import ProtectedRoute from './privateroutes/PrivateRoute';
 import './index.css';
 
 function App() {
@@ -10,11 +10,11 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/admin" element={<AdminPanel isAuthenticated={isAuthenticated}/>}/>
-          <Route path="/" exact element={<Login setIsAuthenticated={setIsAuthenticated}/>} /> {/* Default route */}
-          <Route exact path='/' element={<PrivateRoute/>}>
-            <Route path='/admin' element={<AdminPanel isAuthenticated={isAuthenticated}/>} />
+          <Route path="/" exact element={<Login setIsAuthenticated={setIsAuthenticated}/>} /> 
+          <Route path="/admin" element={<AdminPanel setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>}>  
+            {/* <Route path='/admin' element={<AdminPanel setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>}/> */}
           </Route>
+          <ProtectedRoute path="/admin" element={<AdminPanel/>} isAuthenticated={isAuthenticated}/>
         </Routes>
     </BrowserRouter>
   );
