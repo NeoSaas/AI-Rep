@@ -11,9 +11,9 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md my-4 shadow-md">
+    <div className="bg-white dark:bg-slate-600 p-4 rounded-md my-4 shadow-md mx-10">
       <input 
-        className="border w-full p-2 rounded" 
+        className="border w-full p-2 rounded dark:bg-slate-600" 
         type="text" 
         placeholder="Search conversations..." 
         value={query}

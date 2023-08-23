@@ -11,12 +11,12 @@ function FilterOptions({ onFilter }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md my-4 shadow-md">
-      <label htmlFor="statusFilter" className="block text-sm font-medium text-gray-700 mb-2">Filter by Status</label>
+    <div className="bg-white dark:bg-slate-600 p-4 rounded-md my-4 shadow-md mx-10">
+      <label htmlFor="statusFilter" className="block text-sm font-normal text-gray-700 dark:text-slate-400 mb-2">Filter by Status</label>
       <select 
         id="statusFilter"
         name="status"
-        className="block w-full p-2 border rounded"
+        className="block w-full p-2 border rounded dark:bg-inherit"
         value={status}
         onChange={handleFilterChange}
       >

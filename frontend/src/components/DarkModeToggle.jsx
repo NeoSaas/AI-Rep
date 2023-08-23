@@ -19,12 +19,13 @@ function DarkModeToggle() {
             } else {
                 document.documentElement.classList.remove('dark');
             }
+            console.log(newMode);
             return newMode;
         });
     }
 
     return (
-        <button onClick={toggleDarkMode} className="flex items-center p-2 bg-gray-200 rounded dark:bg-gray-700 transition-colors duration-300">
+        <button onClick={toggleDarkMode} className="flex items-center p-2 bg-gray-200 rounded dark:bg-slate-600 transition-colors duration-300 mx-10">
             {darkMode ? <FaSun className="mr-2" /> : <FaMoon className="mr-2" />}
             {darkMode ? 'Light Mode' : 'Dark Mode'}
         </button>

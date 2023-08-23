@@ -27,7 +27,7 @@ const ConversationList = (props) => {
 
 
   return (
-    <div className="p-4">
+    <div className="p-4 mx-6">
       {conversations.map(convo => (
         <Conversation key={convo.id} data={convo} />
       ))}
