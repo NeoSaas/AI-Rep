@@ -3,24 +3,14 @@ import { Outlet, Navigate, useNavigate, Route } from 'react-router-dom';
 import { Component } from 'react';
 
 
-class ProtectedRoute extends Route {
-    
-
-    render(){
-        const {element, isAuthenticated, ...rest} = this.props
-        const nav = useNavigate();
-
-        return(
-            <Route 
-                {...rest}
-                element={(element) => isAuthenticated ? (<Outlet/>) : nav('/')}
-            >
-            </Route>
-        );
+const PrivateRoute = ({isAuthenticated,}) => {
+    const nav = useNavigate();
+    if(isAuthenticated){
+        return <Outlet/>;
+    }     
+    else{
+        return nav('/');
     }
-    
-}
+};
 
-
-
-export default ProtectedRoute
+export default PrivateRoute;

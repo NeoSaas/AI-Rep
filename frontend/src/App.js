@@ -14,7 +14,7 @@ function App() {
           <Route path="/admin" element={<AdminPanel setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>}>  
             {/* <Route path='/admin' element={<AdminPanel setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>}/> */}
           </Route>
-          <ProtectedRoute path="/admin" element={<AdminPanel/>} isAuthenticated={isAuthenticated}/>
+          {/* <ProtectedRoute path="/admin" element={<AdminPanel/>} isAuthenticated={isAuthenticated}/> */}
         </Routes>
     </BrowserRouter>
   );
