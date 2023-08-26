@@ -159,3 +159,7 @@ chrome-user-data
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+frontend/.gitignore
+adminpanel/fetch_conversations.py
+*.csv
+*.json

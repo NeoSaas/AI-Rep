@@ -8,25 +8,19 @@ function LogoutButton({ setIsAuthenticated }) {
 
     const handleLogout = async () => {
         try {
-            const csrfToken = getCookie('csrftoken'); // Get CSRF token from cookie
+            const csrfToken = getCookie('csrftoken'); // get csrf
             axios.post(
                 'http://127.0.0.1:8000/api/logout/',
-                // {},
-                // {
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'X-CSRFToken': csrfToken,
-                //     },
-                // }
             );
             setIsAuthenticated(false);
             nav('/');
+            console.log("Logout Function Reached")
         } catch (error) {
             console.error(error);
         }
     };
 
-    // Function to retrieve CSRF token from cookie
+    //depracated
     const getCookie = name => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
