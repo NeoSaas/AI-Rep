@@ -30,7 +30,7 @@ function LogoutButton({ setIsAuthenticated }) {
 
     return (
 
-        <button onClick={handleLogout} className="relative text-white mx-10 py-2 px-4 my-2 transition ease-in-out bg-black dark:bg-slate-600 hover:-translate-y-1 hover:scale-100 dark:hover:bg-red-500 hover:bg-red-500 duration-300 rounded-lg">
+        <button onClick={handleLogout} className="relative text-white py-2 px-4 my-2 transition ease-in-out bg-black dark:bg-slate-600 hover:-translate-y-1 hover:scale-100 dark:hover:bg-red-500 hover:bg-red-500 duration-300 rounded-lg">
             Logout
         </button>
        
