@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-so1+68)fat=jco)6bzgw-9t@y(pl(r^!pvktz*77dovwv4co2e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        "node36a.containers.back4app.com",
+    ]
 
 REAMAZE_API_KEY = 'api_key'
 
