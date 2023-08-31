@@ -59,6 +59,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "node36a.containers.back4app.com:5051",
 ]
 
 ROOT_URLCONF = "adminpanel.urls"
