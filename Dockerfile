@@ -7,6 +7,8 @@ WORKDIR /api
 # Copy the application files into the working directory
 COPY . /api
 
+EXPOSE 8000
+
 # Install the application dependencies
 RUN pip install -r requirements.txt
 
