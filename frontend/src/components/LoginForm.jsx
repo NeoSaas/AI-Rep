@@ -23,7 +23,7 @@ function LoginForm({ setIsAuthenticated }) {
             if (response.hasOwnProperty('data')) {
                 console.log(response.data);
                 setIsAuthenticated(true);
-                nav('/admin');
+                    nav('/admin');
                 
             } else {
                 console.error('Unexpected response:', response);
@@ -34,12 +34,12 @@ function LoginForm({ setIsAuthenticated }) {
     };
 
     return (
-        <div className="h-100 bg-slate-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+        <div className="h-100 bg-inherit flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 rounded-lg">
+            <div className="max-w-md w-full bg-[#191921] p-8 rounded-lg shadow-md">
                 {/* Logo & Company Name */}
                 <div className="mb-6 text-center">
-                    <img src="/path/to/logo.png" alt="Company Logo" className="mx-auto h-12 w-auto mb-2" />
-                    <h2 className="text-2xl font-bold text-gray-900">NeoSaaS CS Bot</h2>
+                    <img src={require('./images/logo3.png')} alt="Company Logo" className="mx-auto h-24 w-auto mb-2" />
+                    <h2 className="text-2xl font-bold text-slate-200 ">NeoSaaS</h2>
                 </div>
 
                 <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
