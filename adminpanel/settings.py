@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
         "node36a.containers.back4app.com",
+        "csbot-aaronperel9.b4a.run",
     ]
 
 REAMAZE_API_KEY = 'api_key'
