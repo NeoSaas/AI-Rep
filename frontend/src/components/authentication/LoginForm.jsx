@@ -38,7 +38,7 @@ function LoginForm({ setIsAuthenticated }) {
             <div className="max-w-md w-full bg-[#191921] p-8 rounded-lg shadow-md">
                 {/* Logo & Company Name */}
                 <div className="mb-6 text-center">
-                    <img src={require('./images/logo3.png')} alt="Company Logo" className="mx-auto h-24 w-auto mb-2" />
+                    <img src={require('../images/logo3.png')} alt="Company Logo" className="mx-auto h-24 w-auto mb-2" />
                     <h2 className="text-2xl font-bold text-slate-200 ">NeoSaaS</h2>
                 </div>
 

@@ -7,6 +7,10 @@ import FilterOptions from './FilterOptions';
 import ConversationList from './ConversationList';
 import LogoutButton from './authentication/LogoutButton';
 import AnalyticsPage from './AnalyticsPage';
+import TopBar from './TopBar';
+import {BsFillChatLeftTextFill} from 'react-icons/bs'
+import {SiGoogleanalytics} from 'react-icons/si'
+
 
 function AdminPanel({setIsAuthenticated, isAuthenticated}) {
     // State for search query
@@ -34,31 +38,32 @@ function AdminPanel({setIsAuthenticated, isAuthenticated}) {
     const [activeTab, setActiveTab] = useState('conversations'); 
   
     return (
-      <div className='inline-flex w-screen bg-gray-300 dark:bg-slate-800'>
-        <nav className='inline-block h-full w-max bg-inherit'>
-          <ul className="inline-block mx-10 space-x-1 space-y-4 mt-4 ">
+      <div className='inline-flex w-screen bg-gradient-to-b from-[#27b9d6] to-[#235f80] dark:bg-gradient-to-b dark:from-[#235f80] dark:to-[#273d4f]'>
+        <TopBar/>
+        <nav className='inline-block h-full w-max bg-inherit my-16'>
+          <ul className="inline-block mx-8 space-x-1 space-y-4 mt-4 w-max">
               {/* Tab for Conversations */}
               <li
                 className={`cursor-pointer ${
-                  activeTab === 'conversations' ? 'text-blue-500 my-5' : 'my-5'
+                  activeTab === 'conversations' ? 'text-[#234b66] my-5 py-6 hover:-translate-y-1 hover:scale-100 ease-in-out duration-300' : 'my-5 py-6 hover:-translate-y-1 hover:scale-100 ease-in-out duration-300'
                 }`}
                 onClick={() => setActiveTab('conversations')}
               >
-                Conversations
+                <BsFillChatLeftTextFill size={38} className='inline-flex'/>
               </li>
               {/* Tab for Analytics */}
               <li
                 className={`cursor-pointer ${
-                  activeTab === 'analytics' ? 'text-blue-500 my-5' : 'my-5'
+                  activeTab === 'analytics' ? 'text-[#234b66] my-5 py-6 hover:-translate-y-1 hover:scale-100 ease-in-out duration-300' : 'my-5 py-6 hover:-translate-y-1 hover:scale-100 ease-in-out duration-300'
                 }`}
                 onClick={() => setActiveTab('analytics')}
               >
-                Analytics
+                <SiGoogleanalytics size={38}/>
               </li>
-              <li className='my-5 w-max'>
+              <li className='my-5 py-6 w-max hover:-translate-y-1 hover:scale-100 ease-in-out duration-300'>
                 <DarkModeToggle/>
               </li>
-              <li className='my-5'>
+              <li className='my-5 py-6'>
                 <LogoutButton setIsAuthenticated={setIsAuthenticated}/>
               </li>
             </ul>
