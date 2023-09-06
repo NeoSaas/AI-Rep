@@ -31,7 +31,7 @@ function LogoutButton({ setIsAuthenticated }) {
 
     return (
 
-        <button onClick={handleLogout} className="m-0 text-black transition ease-in-out bg-transparent hover:-translate-y-1 hover:scale-100 dark:hover:text-red-500 hover:text-red-500 duration-300 rounded-lg">
+        <button onClick={handleLogout} className=" text-black transition ease-in-out bg-transparent hover:-translate-y-1 hover:scale-100 dark:hover:text-red-500 hover:text-red-500 duration-300 rounded-lg">
             <BiLogOut size={48}/>
         </button>
        

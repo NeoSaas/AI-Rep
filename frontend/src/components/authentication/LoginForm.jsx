@@ -1,5 +1,5 @@
 // LoginForm.js
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginForm({ setIsAuthenticated }) {
     const nav = useNavigate();
+    const [isLoginFailed, setLoginFailed] = useState(false);
     const initialValues = {
         username: '',
         password: ''
@@ -23,13 +24,16 @@ function LoginForm({ setIsAuthenticated }) {
             if (response.hasOwnProperty('data')) {
                 console.log(response.data);
                 setIsAuthenticated(true);
-                    nav('/admin');
+                setLoginFailed(false);
+                nav('/admin');
                 
             } else {
                 console.error('Unexpected response:', response);
+                setLoginFailed(true);
             }
         } catch (error) {
-            console.error(error); 
+            console.error(error);
+            setLoginFailed(true);
         }
     };
 
@@ -42,9 +46,12 @@ function LoginForm({ setIsAuthenticated }) {
                     <h2 className="text-2xl font-bold text-slate-200 ">NeoSaaS</h2>
                 </div>
 
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit} isLoginFailed={isLoginFailed}>
                     {() => (
                         <Form className="mt-8 space-y-6">
+                            <div className={isLoginFailed ? 'mx-auto w-auto h-auto bg-transparent text-red-500 shadow-xl border-b-2 border-gray-400 text-center italic':'hidden'}>
+                                Login Failed! Invalid Credentials.
+                            </div>
                             <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}" />
                             <div>
                                 <Field name="username" type="text" className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username" />
