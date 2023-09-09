@@ -1,19 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Conversation from './Conversation';
 
 const ConversationList = (props) => {
-  // For simplicity, using static data. You'll fetch this from an API in a real scenario.
-    let conversations = [
-        {
-          id: 1, 
-          name: "Weather Inquiry", 
-          aiMessage: "Hello, how can I help?", 
-          humanMessage: "What's the weather today?", 
-          date: new Date(),
-          tags: ['weather', 'inquiry']
-        },
-        // ... more conversations
-    ];
+    const [conversations, setConversations] = useState([]);
+
+    useEffect(() => {
+        // Fetch conversations from your Django API
+        axios.get('http://your-django-server/api/conversations/')
+            .then((response) => {
+                setConversations(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+    // let conversations = [
+    //     {
+    //       id: 1, 
+    //       name: "Weather Inquiry", 
+    //       aiMessage: "Hello, how can I help?", 
+    //       humanMessage: "What's the weather today?", 
+    //       date: new Date(),
+    //       tags: ['weather', 'inquiry']
+    //     },
+    //     {
+    //       id: 2, 
+    //       name: "Return Service", 
+    //       aiMessage: "Hello, how can I help?", 
+    //       humanMessage: "Hey my product return request hasnt been processed yet can you help?", 
+    //       date: new Date(),
+    //       tags: ['weather', 'inquiry']
+    //     },
+    //     // ... more conversations
+    // ];
     
     // Existing search functionality
     if (props.searchQuery) {

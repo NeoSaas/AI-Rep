@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from rest_framework import status
+from .models import Conversation
+from .serializers import ConversationSerializer
 import requests
 
 def index(request):
@@ -48,3 +51,27 @@ def logout_view(request):
     #logout
     logout(request)
     return JsonResponse({'message': 'Logout successful'})
+
+@api_view(['POST'])
+def conversation_list(request):
+    conversations = Conversation.objects.all()
+    serializer = ConversationSerializer(conversations, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@api_view(['POST'])
+def generate_and_add_conversation(request):
+    # Create a new conversation
+    new_conversation = Conversation(
+        name="New Conversation",  # Customize this as needed
+        ai_message="AI response",
+        human_message="User message",
+        tags=["tag1", "tag2"],  # Customize tags as needed
+    )
+    
+    # Save the new conversation to the database
+    new_conversation.save()
+    
+    # Serialize the new conversation
+    serializer = ConversationSerializer(new_conversation)
+    
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
