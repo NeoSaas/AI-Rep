@@ -6,7 +6,7 @@ function Conversation({ data }) {
 
   return (
     <div className="bg-white p-4 rounded-md my-4 dark:bg-slate-600">
-      <p className="text-red-500 mb-2 dark:text-blue-200">Human: {data.humanMessage}</p>
+      <p className="text-red-500 mb-2 dark:text-blue-200">Human: {data.human_message}</p>
 
       {isEditing ? (
         <textarea 
@@ -15,7 +15,7 @@ function Conversation({ data }) {
           className="w-full p-2 rounded-md"
         />
       ) : (
-        <p className="text-black mb-2 dark:text-blue-500">AI: {data.aiMessage}</p>
+        <p className="text-black mb-2 dark:text-blue-500">AI: {data.ai_message}</p>
       )}
 
       <div className="flex justify-end">

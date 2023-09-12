@@ -29,7 +29,7 @@ function TagStatistics() {
         >
           <div className="flex justify-between items-center">
             <span>{tagItem.tag}</span>
-            <span className="text-sm">{tagItem.count} Conversations</span>
+            <span className="text-sm">{tagItem.count} Conversations </span>
           </div>
           {expandedTag === tagItem.tag && (
             <ul className="pl-4 mt-2">

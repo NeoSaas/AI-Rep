@@ -10,6 +10,7 @@ import AnalyticsPage from './AnalyticsPage';
 import TopBar from './TopBar';
 import {BsFillChatLeftTextFill} from 'react-icons/bs'
 import {SiGoogleanalytics} from 'react-icons/si'
+import {MdOutlineAutoAwesome} from 'react-icons/md'
 
 
 function AdminPanel({setIsAuthenticated, isAuthenticated}) {
@@ -79,9 +80,10 @@ function AdminPanel({setIsAuthenticated, isAuthenticated}) {
               <FilterOptions onFilter={setFilter} />
               {/* Simple tag creation mockup */}
               <div className="p-4 mx-10">
-                <input type="text" placeholder="Conversation ID" className="border p-2 rounded mr-2" />
-                <input type="text" placeholder="New Tag" className="border p-2 rounded mr-2" />
-                <button className="bg-green-500 dark:text-white p-2 rounded" onClick={() => handleTagCreation()}>Add Tag</button>
+                <input type="text" placeholder="Conversation ID" className="border p-2 rounded mr-2 text-black" />
+                <input type="text" placeholder="New Tag" className="border p-2 rounded mr-2 text-black" />
+                <button className="bg-green-500 dark:text-white p-2 rounded mr-2" onClick={() => handleTagCreation()}>Add Tag</button>
+                <button className='inline-flex items-center p-2 h-auto w-20 mx-4 text-black dark:text-white dark:hover:border-white hover:border hover:rounded-lg hover:border-black transition duration-500 ease-in-out'><MdOutlineAutoAwesome size={20}/> Auto</button> 
               </div>
               <ConversationList searchQuery={searchQuery} filter={filter} />
             </>

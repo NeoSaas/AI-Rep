@@ -6,7 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-import requests
+from rest_framework import status
+from .models import Conversation
+from .serializers import ConversationSerializer
+from rest_framework.views import APIView
+from .models import Conversation
 
 def index(request):
     tag_to_monitor = 'your_tag_name'
@@ -48,3 +52,53 @@ def logout_view(request):
     #logout
     logout(request)
     return JsonResponse({'message': 'Logout successful'})
+
+@api_view(['GET'])
+def conversation_list(request):
+    conversations = Conversation.objects.all()
+    serializer = ConversationSerializer(conversations, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@api_view(['POST'])
+def generate_and_add_conversation(request):
+    # Create a new conversation
+    new_conversation = Conversation(
+        name="New Conversation",  
+        ai_message="AI response",
+        human_message="User message",
+        tags=["tag1", "tag2"],  
+    )
+    
+    new_conversation.save()
+
+    serializer = ConversationSerializer(new_conversation)
+    
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class ReamazeWebhook(APIView):
+    def post(self, request):
+        data = request.data
+
+        # Extract relevant information, such as conversation ID or URL
+        conversation_id = data.get('conversation_id')
+        reamaze_url = data.get('conversation_url')
+
+        if conversation_id and reamaze_url:
+            try:
+                existing_conversation = Conversation.objects.get(id=conversation_id)
+                
+                existing_conversation.reamaze_url = reamaze_url
+                existing_conversation.save()
+                
+                return Response({'message': 'Conversation updated successfully.'}, status=status.HTTP_200_OK)
+            
+            except Conversation.DoesNotExist:
+                new_conversation = Conversation(
+                    id=conversation_id,
+                    reamaze_url=reamaze_url
+                )
+                new_conversation.save()
+                
+                return Response({'message': 'New conversation created successfully.'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'message': 'Invalid webhook data.'}, status=status.HTTP_400_BAD_REQUEST)
