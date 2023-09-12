@@ -6,14 +6,15 @@ const ConversationList = (props) => {
     const [conversations, setConversations] = useState([]);
 
     useEffect(() => {
-        // Fetch conversations from your Django API
-        axios.get('http://your-django-server/api/conversations/')
+        const interval = setInterval(() => {
+          axios.get('http://127.0.0.1:8000/api/conversations/')
             .then((response) => {
                 setConversations(response.data);
             })
             .catch((error) => {
                 console.error(error);
             });
+        },10000);
     }, []);
     // let conversations = [
     //     {
@@ -38,8 +39,9 @@ const ConversationList = (props) => {
     // Existing search functionality
     if (props.searchQuery) {
         conversations = conversations.filter(convo =>
-        convo.aiMessage.includes(props.searchQuery) || 
-        convo.humanMessage.includes(props.searchQuery) ||
+        convo.reamaze_url.includes(props.searchQuery) ||
+        convo.ai_Message.includes(props.searchQuery) || 
+        convo.human_message.includes(props.searchQuery) ||
         convo.name.includes(props.searchQuery) ||
         convo.tags.some(tag => tag.includes(props.searchQuery))
     );

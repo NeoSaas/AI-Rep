@@ -79,8 +79,8 @@ function AdminPanel({setIsAuthenticated, isAuthenticated}) {
               <FilterOptions onFilter={setFilter} />
               {/* Simple tag creation mockup */}
               <div className="p-4 mx-10">
-                <input type="text" placeholder="Conversation ID" className="border p-2 rounded mr-2" />
-                <input type="text" placeholder="New Tag" className="border p-2 rounded mr-2" />
+                <input type="text" placeholder="Conversation ID" className="border p-2 rounded mr-2 text-black" />
+                <input type="text" placeholder="New Tag" className="border p-2 rounded mr-2 text-black" />
                 <button className="bg-green-500 dark:text-white p-2 rounded" onClick={() => handleTagCreation()}>Add Tag</button>
               </div>
               <ConversationList searchQuery={searchQuery} filter={filter} />

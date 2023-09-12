@@ -58,7 +58,7 @@ function AnalyticsGraph() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-auto h-[50rem]">
       <h2 className="text-xl mb-4">Conversations by Day</h2>
       <Bar data={data} options={options} />
     </div>

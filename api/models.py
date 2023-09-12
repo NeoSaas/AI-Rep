@@ -3,7 +3,8 @@ from django.db import models
 # Create your models here.
 
 class Conversation(models.Model):
-    code = models.CharField(max_length=8, unique=True, default="00000000")
+    id = models.CharField(max_length=255, unique=True, default="00000000", primary_key=True)
+    reamaze_url = models.TextField()
     name = models.CharField(max_length=255)
     ai_message = models.TextField()
     human_message = models.TextField()
