@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-function AnalyticsGraph() {
-  // Mock data for the graph 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function AnalyticsGraph({ data }) {
+  const [colorMapping, setColorMapping] = useState({});
+
+  // Generate random colors for new tags and store them in colorMapping state
+  useEffect(() => {
+    const newColorMapping = {};
+    data.forEach((item) => {
+      if (!colorMapping[item.tag]) {
+        newColorMapping[item.tag] = getRandomColor();
+      }
+    });
+    setColorMapping((prevColorMapping) => ({
+      ...prevColorMapping,
+      ...newColorMapping,
+    }));
+  }, [data]);
+
+  const labels = data.map((item) => item.tag);
+  const counts = data.map((item) => item.count);
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -21,46 +49,33 @@ function AnalyticsGraph() {
     Legend
   );
 
-  const data = {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+  const chartData = {
+    labels: labels,
     datasets: [
       {
-        label: 'Number of Conversations',
-        data: [50, 75, 100, 60, 90], 
-        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-        borderColor: 'rgba(54, 162, 235, 1)',
+        label: 'Conversation Count',
+        backgroundColor: labels.map((tag) => colorMapping[tag] || getRandomColor()), // Use stored color or generate a new one
+        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
+        hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
+        hoverBorderColor: 'rgba(75, 192, 192, 1)',
+        data: counts,
       },
     ],
   };
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-  // Options for the graph
   const options = {
-    labels,
     scales: {
-        x: {
-          type: 'category', // Make sure this is specified for the x-axis
-          title: {
-            display: true,
-            text: 'Days of the Week',
-          },
-        },
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Number of Conversations',
-          },
-        },
+      y: {
+        beginAtZero: true,
       },
+    },
   };
 
   return (
     <div className="p-4 w-auto h-[50rem]">
       <h2 className="text-xl mb-4">Conversations by Day</h2>
-      <Bar data={data} options={options} />
+      <Bar data={chartData} options={options} />
     </div>
   );
 }

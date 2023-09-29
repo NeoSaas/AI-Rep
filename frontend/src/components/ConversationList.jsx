@@ -13,30 +13,10 @@ const ConversationList = (props) => {
             })
             .catch((error) => {
                 console.error(error);
-            });
-        },10000);
+            }); 
+        },100000);
     }, []);
-    // let conversations = [
-    //     {
-    //       id: 1, 
-    //       name: "Weather Inquiry", 
-    //       aiMessage: "Hello, how can I help?", 
-    //       humanMessage: "What's the weather today?", 
-    //       date: new Date(),
-    //       tags: ['weather', 'inquiry']
-    //     },
-    //     {
-    //       id: 2, 
-    //       name: "Return Service", 
-    //       aiMessage: "Hello, how can I help?", 
-    //       humanMessage: "Hey my product return request hasnt been processed yet can you help?", 
-    //       date: new Date(),
-    //       tags: ['weather', 'inquiry']
-    //     },
-    //     // ... more conversations
-    // ];
     
-    // Existing search functionality
     if (props.searchQuery) {
         conversations = conversations.filter(convo =>
         convo.reamaze_url.includes(props.searchQuery) ||

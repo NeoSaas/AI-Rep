@@ -7,10 +7,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from rest_framework import status
-from .models import Conversation
-from .serializers import ConversationSerializer
+from .models import Conversation, ConversationStatistics
+from .serializers import ConversationStatSerializer, ConversationSerializer
 from rest_framework.views import APIView
-from .models import Conversation
+from django.core.management import call_command
 
 def index(request):
     tag_to_monitor = 'your_tag_name'
@@ -21,18 +21,9 @@ def index(request):
 
 @api_view(['POST'])
 def bot_action(request):
-    #bot actions
+    #respond to email
     bot_response = "Bot's response here"
     return Response({'response': bot_response})
-
-# def fetch_conversations(tag):
-#     #get re:amaze conversations by tag
-#     url = 'https://api.reamaze.com/v1/conversations.json'
-#     headers = {'Authorization': f'Bearer {settings.REAMAZE_API_KEY}'}
-#     params = {'q[filter]': f'tag:{tag}'}
-
-#     response = requests.get(url, headers=headers, params=params)
-#     return response.json()['conversations']
 
 @api_view(['POST'])
 def login_view(request):
@@ -47,7 +38,6 @@ def login_view(request):
         return JsonResponse({'message': 'Login failed'}, status=401)
 
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
 def logout_view(request):
     #logout
     logout(request)
@@ -102,3 +92,13 @@ class ReamazeWebhook(APIView):
                 return Response({'message': 'New conversation created successfully.'}, status=status.HTTP_201_CREATED)
         else:
             return Response({'message': 'Invalid webhook data.'}, status=status.HTTP_400_BAD_REQUEST)
+
+def conversation_stats(request):
+    call_command('calc_stats')
+    stats = ConversationStatistics.objects.all()
+    data = [{'tag': stat.tag, 'count': stat.conversation_count} for stat in stats]
+
+    return JsonResponse({'data': data})
+
+def send_email(request):
+    return JsonResponse({'data': "data"})
