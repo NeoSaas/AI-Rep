@@ -21,5 +21,6 @@ from api.urls import urlpatterns
 urlpatterns = [
     path('api/bot-action/', include('api.urls')),
     path('', include('api.urls')),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('sse/', include('sse.urls'))
 ]

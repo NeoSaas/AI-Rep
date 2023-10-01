@@ -8,6 +8,7 @@ urlpatterns = [
     path('api/logout/', views.logout_view, name='logout'),
     path('api/conversations/', views.conversation_list, name='conversation-list'),
     path('api/reamaze-webhook/', views.ReamazeWebhook.post, name='conversation-create'),
+    path('api/get-statistics/', views.conversation_stats, name='conversation-stats'),
     
 ]
 

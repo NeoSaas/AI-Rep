@@ -4,58 +4,52 @@ import Conversation from './Conversation';
 
 const ConversationList = (props) => {
     const [conversations, setConversations] = useState([]);
+    const [filteredConversations, setFilteredConversations] = useState([]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-          axios.get('http://127.0.0.1:8000/api/conversations/')
-            .then((response) => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/conversations/');
                 setConversations(response.data);
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error(error);
-            });
-        },10000);
+            }
+        };
+
+        fetchData();
+        const interval = setInterval(fetchData, 100000);
+
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
-    // let conversations = [
-    //     {
-    //       id: 1, 
-    //       name: "Weather Inquiry", 
-    //       aiMessage: "Hello, how can I help?", 
-    //       humanMessage: "What's the weather today?", 
-    //       date: new Date(),
-    //       tags: ['weather', 'inquiry']
-    //     },
-    //     {
-    //       id: 2, 
-    //       name: "Return Service", 
-    //       aiMessage: "Hello, how can I help?", 
-    //       humanMessage: "Hey my product return request hasnt been processed yet can you help?", 
-    //       date: new Date(),
-    //       tags: ['weather', 'inquiry']
-    //     },
-    //     // ... more conversations
-    // ];
-    
-    // Existing search functionality
-    if (props.searchQuery) {
-        conversations = conversations.filter(convo =>
-        convo.reamaze_url.includes(props.searchQuery) ||
-        convo.ai_Message.includes(props.searchQuery) || 
-        convo.human_message.includes(props.searchQuery) ||
-        convo.name.includes(props.searchQuery) ||
-        convo.tags.some(tag => tag.includes(props.searchQuery))
+
+    useEffect(() => {
+        if (props.searchQuery) {
+          const filtered = conversations.filter(convo =>
+            convo &&
+            convo.reamaze_url &&
+            convo.ai_Message &&
+            convo.human_message &&
+            convo.name &&
+            convo.tags &&
+            convo.tags.some(tag => tag.includes(props.searchQuery))
+          );
+            setFilteredConversations(filtered);
+        } else {
+            setFilteredConversations(conversations);
+        }
+    }, [props.searchQuery, conversations]);
+
+    return (
+        <div className="p-4 mx-6">
+            {filteredConversations.map(convo => (
+                <Conversation key={convo.id} data={convo} />
+            ))}
+        </div>
     );
 }
 
-
-  return (
-    <div className="p-4 mx-6">
-      {conversations.map(convo => (
-        <Conversation key={convo.id} data={convo} />
-      ))}
-    </div>
-  );
-}
-
 export default ConversationList;
+
 
