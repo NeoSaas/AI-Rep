@@ -165,3 +165,6 @@ frontend/.gitignore
 adminpanel/fetch_conversations.py
 *.csv
 *.json
+
+# Extras
+./migrations
