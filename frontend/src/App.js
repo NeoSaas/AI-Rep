@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Login from './components/authentication/LoginScreen';
 import AdminPanel from './components/AdminPanel';
 import './index.css';
+import ExpandedConversation from './components/ExpandedConversation';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -13,8 +14,10 @@ function App() {
           {
             isAuthenticated ? 
               [
-                <Route path="/admin" element={<AdminPanel setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>}/>  
-
+                <>
+                  <Route path="/admin" element={<AdminPanel setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>}/>  
+                  <Route path="/admin/conversation/" element={<ExpandedConversation/>} />
+                </>
               ]
               :
               null

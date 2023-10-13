@@ -43,7 +43,7 @@ function LoginForm({ setIsAuthenticated }) {
                 {/* Logo & Company Name */}
                 <div className="mb-6 text-center">
                     <img src={require('../images/logo3.png')} alt="Company Logo" className="mx-auto h-24 w-auto mb-2" />
-                    <h2 className="text-2xl font-bold text-slate-200 ">NeoSaaS</h2>
+                    <h2 className="text-2xl font-bold text-slate-200 ">AI-Rep</h2>
                 </div>
 
                 <div className={isLoginFailed ? 'mx-auto w-auto h-auto bg-transparent text-red-500 shadow-xl border-b-2 border-gray-400 text-center italic':'hidden'}>

@@ -16,27 +16,22 @@ import {MdOutlineAutoAwesome} from 'react-icons/md'
 function AdminPanel({setIsAuthenticated, isAuthenticated}) {
     // State for search query
     const [searchQuery, setSearchQuery] = useState('');
-    
-    // State for filter options
+    const [activeTab, setActiveTab] = useState('conversations'); 
     const [filter, setFilter] = useState('All');
 
-    // Update search query based on user input
     const handleSearchQueryChange = (query) => {
         setSearchQuery(query);
     };
 
-    // Update filter based on user selection
     const handleFilterChange = (selectedFilter) => {
         setFilter(selectedFilter);
     };
     
     const handleTagCreation = (conversationId, tag) => {
-      // Here, you'd ideally update your backend data.
-      // For the sake of this example, you could update your frontend "database"
-      // or simulate the tagging with a local state.
+      
     };
 
-    const [activeTab, setActiveTab] = useState('conversations'); 
+    
   
     return (
       <div className='inline-flex w-screen bg-gradient-to-b from-[#27b9d6] to-[#235f80] dark:bg-gradient-to-b dark:from-[#235f80] dark:to-[#273d4f]'>
@@ -85,7 +80,8 @@ function AdminPanel({setIsAuthenticated, isAuthenticated}) {
                 <button className="bg-green-500 dark:text-white p-2 rounded mr-2" onClick={() => handleTagCreation()}>Add Tag</button>
                 <button className='flex items-center p-2 h-auto w-20 mx-4 text-black dark:text-white dark:hover:border-white hover:border hover:rounded-lg hover:border-black transition duration-500 ease-in-out'><MdOutlineAutoAwesome size={20}/> Auto</button> 
               </div>
-              <ConversationList searchQuery={searchQuery} filter={filter} />
+              <ConversationList searchQuery={searchQuery} filter={filter}/>
+               
             </>
           ):(
             <>
